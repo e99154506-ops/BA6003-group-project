@@ -1,11 +1,10 @@
 # BA6003 Group Project
 
 ## Project Structure
-- `src/`: Source code
-- `data/`: Dataset
-- `outputs/`: Generated charts and results
+- `src/` : Source code (modularised into data_loader, factor_model, backtest_model, config, main)
+- `data/` : Dataset
+- `outputs/` : Generated charts, results, and pipeline logs (`pipeline.log`)
+- `tests/` : Unit tests for core pipeline functions
 
 ## How to Run
-- 运行流水线: `python -m src.main`
-- 运行测试: `pytest tests/ -v`
-- 日志位置: `outputs/pipeline.log`
+Run the full pipeline:
