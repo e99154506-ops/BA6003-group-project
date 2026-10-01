@@ -6,4 +6,6 @@
 - `outputs/`: Generated charts and results
 
 ## How to Run
-Run scripts in `src/` to reproduce outputs.
+- 运行流水线: `python -m src.main`
+- 运行测试: `pytest tests/ -v`
+- 日志位置: `outputs/pipeline.log`
