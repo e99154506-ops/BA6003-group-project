@@ -55,7 +55,7 @@ headers = {
 }
 
 body = {
-    "model": "google/gemini-flash-1.5",   # 如果报错 model not found，换成 "meta-llama/llama-3.1-8b-instruct:free"
+    "model": "meta-llama/llama-3.1-8b-instruct:free",   # 如果报错 model not found，换成 "meta-llama/llama-3.1-8b-instruct:free"
     "messages": [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt}
