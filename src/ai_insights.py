@@ -76,7 +76,7 @@ def generate_ai_insight(view_context: str, metrics: dict) -> str:
             },
             json={
                 # 免费账号可用的开源模型
-                "model": "meta-llama/llama-3-8b-instruct:free",
+                "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
                 "messages": [
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt}
