@@ -3,7 +3,12 @@ import requests
 
 # 在这里填入 API Key
 # https://openrouter.ai/keys 免费注册拿一个
-API_KEY = "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"   # <--- 把这行引号里的内容换成你自己的 Key
+API_KEY = os.getenv("OPENROUTER_API_KEY")
+
+# 3. 加一个安全检查，防止忘配
+if not API_KEY:
+    print("❌ 错误：没找到 OPENROUTER_API_KEY，请检查 .env 文件！")
+    exit()
 
 
 # 模拟的仪表盘数据
