@@ -5,7 +5,7 @@ import requests
 # 第一步：在这里填入你的 API Key
 # 去 https://openrouter.ai/keys 免费注册拿一个
 # ==========================================
-API_KEY = "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"   # <--- 把这行引号里的内容换成你自己的 Key
+API_KEY = "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"   # <--- 把这行引号里的内容换成你自己的 Key
 
 
 # ==========================================
