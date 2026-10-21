@@ -1,24 +1,42 @@
-from pathlib import Path
-import matplotlib.pyplot as plt
+# src/config.py  （顶层）
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DATA_DIR = PROJECT_ROOT / "data" / "raw"
-DATA_DIR.mkdir(parents=True, exist_ok=True)
+RISK_PROFILES = {
+    "Conservative": {
+        "top_n": 10,
+        "vol_filter": 0.35,
+        "max_weight": 0.08,
+        "method": "combo",
+        "mom_weight": 0.4,
+        "val_weight": 0.6,
+    },
+    "Balanced": {
+        "top_n": 15,
+        "vol_filter": 0.45,
+        "max_weight": 0.06,
+        "method": "combo",
+        "mom_weight": 0.6,
+        "val_weight": 0.4,
+    },
+    "Aggressive": {
+        "top_n": 20,
+        "vol_filter": 0.60,
+        "max_weight": 0.05,
+        "method": "momentum",
+        "mom_weight": 0.8,
+        "val_weight": 0.2,
+    },
+}
 
-# 数据下载
-TICKERS = ['AAPL', 'MSFT', 'GOOG', 'TSLA', 'AMZN', 'NVDA']
-START_DATE = "2015-01-01"
-END_DATE = "2024-12-31"
-OUTPUTS_DIR = DATA_DIR
-PRICE_CSV = DATA_DIR / "sp500_prices.csv"
+# 给回测/数据筛选用的日期字符串
+START_DEFAULT = "2015-01-01"
+END_DEFAULT   = "2024-12-31"
 
-# 回测
-LOOKBACK = 6
-TOP_QUANTILE = 0.1
-TOP_N = 1
-RISK_FREE_RATE = 0.02
-FACTOR_METHOD = "combo"
+# 给侧边栏“年份选择”用的整数（避免再对 range(2015,2025).index("2015-01-01")）
+START_YEAR_DEFAULT = 2015
+END_YEAR_DEFAULT   = 2024
 
-# 中文字体
-plt.rcParams['font.sans-serif'] = ['STHeiti', 'Arial Unicode MS', 'sans-serif']
-plt.rcParams['axes.unicode_minus'] = False
+# Available universe / data assumptions for mock generator
+TICKERS = [f"T{i:03d}" for i in range(1, 51)]  # T001..T050
+
+# SPY file path helper (relative to project root)
+SPY_PATH = "data/raw/spy_monthly.csv"
