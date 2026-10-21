@@ -44,6 +44,7 @@ BA6003-group-project/
 │   ├── main.py
 │   └── metrics.py
 ├── tests/
+│   ├── test_ai_insight.py
 │   ├── test_backtest.py
 │   ├── test_data_loader.py
 │   └── test_factor_model.py
