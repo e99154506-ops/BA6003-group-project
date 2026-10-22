@@ -32,3 +32,28 @@ def test_build_prompt_handles_dataframe_yearly_dict_shape():
     assert "2020" in prompt
     assert "Strategy" in prompt
     assert "SPY" in prompt
+
+
+def test_client_uses_streamlit_cloud_secret_when_environment_key_is_missing(monkeypatch):
+    captured = {}
+
+    class FakeOpenAI:
+        def __init__(self, **kwargs):
+            captured.update(kwargs)
+
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    monkeypatch.setattr(ai_insight, "OpenAI", FakeOpenAI)
+    monkeypatch.setattr(
+        ai_insight,
+        "_load_env",
+        lambda: None,
+    )
+
+    import streamlit as st
+
+    monkeypatch.setattr(st, "secrets", {"OPENROUTER_API_KEY": "cloud-test-key"})
+
+    ai_insight._client()
+
+    assert captured["api_key"] == "cloud-test-key"
+    assert captured["base_url"] == "https://openrouter.ai/api/v1"

@@ -73,6 +73,14 @@ OPENROUTER_API_KEY=your_key_here
 
 The AI insight feature uses the model `deepseek/deepseek-chat` through OpenRouter.
 
+For Streamlit Community Cloud, open the app's settings, choose **Secrets**, and add:
+
+```toml
+OPENROUTER_API_KEY = "your_new_openrouter_key"
+```
+
+Save the settings and restart or redeploy the app. Cloud deployments do not read your local `.env` file.
+
 ## Run the Dashboard
 
 From the project root:
@@ -114,4 +122,4 @@ This repository is organised for review by instructors and evaluators. The code 
 
 ## Security Reminder
 
-Do not commit `.env` files or API keys to GitHub. The project relies on local environment variables for AI functionality.
+Do not commit `.env` files or API keys to GitHub. The project uses local environment variables or Streamlit Cloud Secrets for AI functionality.

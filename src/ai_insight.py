@@ -28,7 +28,17 @@ def _client():
         raise RuntimeError("openai package not installed. Run: pip install openai")
     key = os.getenv("OPENROUTER_API_KEY", "").strip()
     if not key:
-        raise RuntimeError("OPENROUTER_API_KEY not found in .env")
+        try:
+            import streamlit as st
+
+            key = str(st.secrets.get("OPENROUTER_API_KEY", "")).strip()
+        except Exception:
+            key = ""
+    if not key:
+        raise RuntimeError(
+            "OPENROUTER_API_KEY is not configured. Add it to Streamlit Cloud "
+            "Secrets or to a local .env file."
+        )
     return OpenAI(
         base_url="https://openrouter.ai/api/v1",
         api_key=key,

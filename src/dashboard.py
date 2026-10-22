@@ -388,4 +388,7 @@ if st.button("Generate AI Interpretation", type="primary"):
             st.markdown(text)
         except Exception as e:
             st.error(f"Could not generate insight: {e}")
-            st.info("Check that OPENROUTER_API_KEY is set in .env and has remaining credits.")
+            st.info(
+                "For Streamlit Cloud, add OPENROUTER_API_KEY under App settings > Secrets. "
+                "Locally, set it in .env. Also check that the key has remaining credits."
+            )
