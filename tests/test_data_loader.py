@@ -4,6 +4,14 @@ import pytest
 from src import data_loader
 
 
+def test_load_monthly_reads_wide_price_panel():
+    monthly = data_loader.load_monthly()
+
+    assert monthly.index.name == "date"
+    assert "T000" in monthly.columns
+    assert pd.api.types.is_datetime64_any_dtype(monthly.index)
+
+
 def test_load_prices_renames_columns_sorts_rows_and_converts_close(
     tmp_path, monkeypatch
 ):

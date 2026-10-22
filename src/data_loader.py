@@ -46,7 +46,12 @@ def load_prices(path: str | Path | None = None) -> pd.DataFrame:
 
 
 def _read(path: Path) -> pd.DataFrame:
-    return load_prices(path)
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Data file missing: {path}. "
+            "Run: `python -m src.generate_mock_data` from project root."
+        )
+    return pd.read_csv(path, parse_dates=["date"]).set_index("date").sort_index()
 
 
 def load_monthly() -> pd.DataFrame:
@@ -54,14 +59,7 @@ def load_monthly() -> pd.DataFrame:
 
 
 def load_spy_benchmark() -> pd.Series:
-    prices = _read(DATA_DIR / "spy_monthly.csv")
-    if "close" in prices.columns:
-        series = prices["close"]
-    elif "SPY" in prices.columns:
-        series = prices["SPY"]
-    else:
-        series = prices.iloc[:, -1]
-    return pd.to_numeric(series, errors="coerce").rename("SPY").sort_index()
+    return _read(DATA_DIR / "spy_monthly.csv")["SPY"]
 
 
 def filter_by_date(df: pd.DataFrame, start_date: str, end_date: str) -> pd.DataFrame:

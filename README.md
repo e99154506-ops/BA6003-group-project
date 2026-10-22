@@ -48,6 +48,7 @@ BA6003-group-project/
 │   ├── test_backtest.py
 │   ├── test_data_loader.py
 │   └── test_factor_model.py
+├── requirements.txt
 ├── outputs/
 ├── README.md
 ├── .gitignore
@@ -61,7 +62,7 @@ Create a Python environment and install the required packages:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install streamlit pandas numpy matplotlib python-dotenv openai pytest
+pip install -r requirements.txt
 ```
 
 Create a local `.env` file at the project root and add your OpenRouter API key:

@@ -4,11 +4,14 @@ from src import ai_insight
 
 
 def test_load_env_reads_project_dotenv(monkeypatch):
-    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    project_env = ai_insight.Path(ai_insight.__file__).resolve().parent.parent / ".env"
+    loaded_paths = []
 
+    monkeypatch.setattr(ai_insight.Path, "exists", lambda path: path == project_env)
+    monkeypatch.setattr(ai_insight, "load_dotenv", lambda path: loaded_paths.append(path))
     ai_insight._load_env()
 
-    assert os.getenv("OPENROUTER_API_KEY", "").strip()
+    assert loaded_paths == [project_env]
 
 
 def test_build_prompt_handles_dataframe_yearly_dict_shape():
