@@ -48,6 +48,8 @@ BA6003-group-project/
 │   ├── test_backtest.py
 │   ├── test_data_loader.py
 │   └── test_factor_model.py
+├── sql/
+│   └── factor_analysis.sql
 ├── requirements.txt
 ├── outputs/
 ├── README.md
@@ -105,6 +107,17 @@ The project can also be executed directly from code:
 ```bash
 source .venv/bin/activate
 PYTHONPATH=. python src/main.py
+```
+
+## SQL Factor Analysis
+
+`sql/factor_analysis.sql` uses DuckDB SQL to analyze the existing monthly price CSVs. It reshapes the stock price panel, calculates monthly returns, six-month momentum and volatility, ranks an equal-weight top-15 portfolio, and compares annual compounded returns with SPY.
+
+Run it from the project root after installing dependencies:
+
+```bash
+source .venv/bin/activate
+python -c 'import duckdb; result = duckdb.connect().execute(open("sql/factor_analysis.sql").read()).df(); print(result.to_string(index=False))'
 ```
 
 ## Run Tests

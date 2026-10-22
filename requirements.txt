@@ -5,3 +5,4 @@ matplotlib
 python-dotenv
 openai
 pytest
+duckdb
